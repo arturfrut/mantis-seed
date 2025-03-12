@@ -3,21 +3,15 @@
 import { useEffect, useState, SyntheticEvent } from 'react';
 
 // next
-import Image from 'next/legacy/image';
-import NextLink from 'next/link';
 import { signIn } from 'next-auth/react';
 
 // material-ui
-import { Theme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid2';
-import Link from '@mui/material/Link';
 import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -41,16 +35,9 @@ import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 
 // types
 import { StringColorProps } from 'types/password';
-
-const Auth0 = '/assets/images/icons/auth0.svg';
-const Cognito = '/assets/images/icons/aws-cognito.svg';
-const Google = '/assets/images/icons/google.svg';
-
-// ============================|| AWS CONNITO - LOGIN ||============================ //
+import { Checkbox } from '@mui/material';
 
 export default function AuthRegister({ providers, csrfToken }: any) {
-  const downSM = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
-
   const [level, setLevel] = useState<StringColorProps>();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -90,7 +77,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
             .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
             .max(10, 'Password must be less than 10 characters')
         })}
-        onSubmit={async (values, { setErrors, setSubmitting }) => {
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           const trimmedEmail = values.email.trim();
           signIn('register', {
             redirect: false,
@@ -112,52 +99,9 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           <form noValidate onSubmit={handleSubmit}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <Grid container spacing={3}>
-              <Grid size={6}>
-                <Stack sx={{ gap: 1 }}>
-                  <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
-                  <OutlinedInput
-                    id="firstname-login"
-                    type="firstname"
-                    value={values.firstname}
-                    name="firstname"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Enter your First Name"
-                    fullWidth
-                    error={Boolean(touched.firstname && errors.firstname)}
-                  />
-                </Stack>
-                {touched.firstname && errors.firstname && (
-                  <FormHelperText error id="helper-text-firstname-signup">
-                    {errors.firstname}
-                  </FormHelperText>
-                )}
-              </Grid>
-              <Grid size={6}>
-                <Stack sx={{ gap: 1 }}>
-                  <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
-                  <OutlinedInput
-                    fullWidth
-                    error={Boolean(touched.lastname && errors.lastname)}
-                    id="lastname-signup"
-                    type="lastname"
-                    value={values.lastname}
-                    name="lastname"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Enter your Last Name"
-                    inputProps={{}}
-                  />
-                </Stack>
-                {touched.lastname && errors.lastname && (
-                  <FormHelperText error id="helper-text-lastname-signup">
-                    {errors.lastname}
-                  </FormHelperText>
-                )}
-              </Grid>
               <Grid size={12}>
                 <Stack sx={{ gap: 1 }}>
-                  <InputLabel htmlFor="company-signup">Company</InputLabel>
+                  {/* <InputLabel htmlFor="company-signup">Company</InputLabel> */}
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.company && errors.company)}
@@ -166,7 +110,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     name="company"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter your company name"
+                    placeholder="Ingresá el nombre de tu empresa"
                     inputProps={{}}
                   />
                 </Stack>
@@ -177,8 +121,22 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                 )}
               </Grid>
               <Grid size={12}>
+                <Divider>
+                  <Typography variant="subtitle1">Crear cuenta con:</Typography>
+                </Divider>
+              </Grid>
+              <Grid size={12}>
+                <Box>
+                  <FirebaseSocial />
+                </Box>
+              </Grid>
+              <Grid size={12}>
+                <Divider>
+                  <Typography variant="subtitle1">o</Typography>
+                </Divider>
+              </Grid>
+              <Grid size={12}>
                 <Stack sx={{ gap: 1 }}>
-                  <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
@@ -188,7 +146,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                     name="email"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter email address"
+                    placeholder="Ingresa tu email"
                     inputProps={{}}
                   />
                 </Stack>
@@ -200,7 +158,6 @@ export default function AuthRegister({ providers, csrfToken }: any) {
               </Grid>
               <Grid size={12}>
                 <Stack sx={{ gap: 1 }}>
-                  <InputLabel htmlFor="password-signup">Password</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.password && errors.password)}
@@ -226,7 +183,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
                         </IconButton>
                       </InputAdornment>
                     }
-                    placeholder="Enter password"
+                    placeholder="**********"
                   />
                 </Stack>
                 {touched.password && errors.password && (
@@ -249,16 +206,8 @@ export default function AuthRegister({ providers, csrfToken }: any) {
               </Grid>
 
               <Grid sx={{ mt: -1 }} size={12}>
-                <Typography variant="body2">
-                  By Signing up, you agree to our &nbsp;
-                  <Link variant="subtitle2" component={NextLink} href="#">
-                    Terms of Service
-                  </Link>
-                  &nbsp; and &nbsp;
-                  <Link variant="subtitle2" component={NextLink} href="#">
-                    Privacy Policy
-                  </Link>
-                </Typography>
+                <Checkbox />
+                <Typography variant="body2">Acepto Terminos y condiciones</Typography>
               </Grid>
               {errors.submit && (
                 <Grid size={12}>
@@ -268,7 +217,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
               <Grid size={12}>
                 <AnimateButton>
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Create Account
+                    Continuar
                   </Button>
                 </AnimateButton>
               </Grid>
@@ -276,68 +225,6 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           </form>
         )}
       </Formik>
-      {providers && (
-        <Stack
-          direction="row"
-          sx={{
-            gap: { xs: 1, sm: 2 },
-            justifyContent: { xs: 'space-around', sm: 'space-between' },
-            mt: 3,
-            '& .MuiButton-startIcon': { mr: { xs: 0, sm: 1 }, ml: { xs: 0, sm: -0.5 } }
-          }}
-        >
-          {Object.values(providers).map((provider: any) => {
-            if (provider.id === 'login' || provider.id === 'register') {
-              return;
-            }
-            return (
-              <Box key={provider.name} sx={{ width: '100%' }}>
-                <Divider sx={{ mt: 2 }}>
-                  <Typography variant="caption"> Sign up with</Typography>
-                </Divider>
-                {provider.id === 'google' && (
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth={!downSM}
-                    startIcon={<Image src={Google} alt="Twitter" width={16} height={16} />}
-                    onClick={() => signIn(provider.id, { callbackUrl: APP_DEFAULT_PATH })}
-                  >
-                    {!downSM && 'Google'}
-                  </Button>
-                )}
-                {provider.id === 'auth0' && (
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth={!downSM}
-                    startIcon={<Image src={Auth0} alt="Twitter" width={16} height={16} />}
-                    onClick={() => signIn(provider.id, { callbackUrl: APP_DEFAULT_PATH })}
-                  >
-                    {!downSM && 'Auth0'}
-                  </Button>
-                )}
-                {provider.id === 'cognito' && (
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth={!downSM}
-                    startIcon={<Image src={Cognito} alt="Twitter" width={16} height={16} />}
-                    onClick={() => signIn(provider.id, { callbackUrl: APP_DEFAULT_PATH })}
-                  >
-                    {!downSM && 'Cognito'}
-                  </Button>
-                )}
-              </Box>
-            );
-          })}
-        </Stack>
-      )}
-      {!providers && (
-        <Box sx={{ mt: 3 }}>
-          <FirebaseSocial />
-        </Box>
-      )}
     </>
   );
 }

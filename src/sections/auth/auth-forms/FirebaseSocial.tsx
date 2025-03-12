@@ -8,10 +8,10 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 // assets
-const Auth0 = '/assets/images/icons/auth0.svg';
-const Cognito = '/assets/images/icons/aws-cognito.svg';
+// const Auth0 = '/assets/images/icons/auth0.svg';
+// const Cognito = '/assets/images/icons/aws-cognito.svg';
 const Google = '/assets/images/icons/google.svg';
-
+const Facebook = '/assets/images/icons/facebook.svg';
 // ==============================|| FIREBASE - SOCIAL BUTTON ||============================== //
 
 export default function FirebaseSocial() {
@@ -32,21 +32,15 @@ export default function FirebaseSocial() {
       >
         {!downSM && 'Google'}
       </Button>
+
+      {/* MODIFICAR PARA QUE FUNCIONE CON FACEBOOK */}
       <Button
         variant="outlined"
         color="secondary"
         fullWidth={!downSM}
-        startIcon={<Image src={Auth0} alt="Twitter" width={16} height={16} style={{ maxWidth: '100%', height: 'auto' }} />}
+        startIcon={<Image src={Facebook} alt="Twitter" width={12} height={12} style={{ maxWidth: '100%', height: 'auto' }} />}
       >
-        {!downSM && 'Auth0'}
-      </Button>
-      <Button
-        variant="outlined"
-        color="secondary"
-        fullWidth={!downSM}
-        startIcon={<Image src={Cognito} alt="Twitter" width={16} height={16} style={{ maxWidth: '100%', height: 'auto' }} />}
-      >
-        {!downSM && 'Cognito'}
+        {!downSM && 'Facebook'}
       </Button>
     </Stack>
   );
