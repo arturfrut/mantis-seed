@@ -18,9 +18,10 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
   {
-    ignores: ['**/node_modules/*', '**/.next/*']
+    ignores: ['**/node_modules/*', '**/.next/*', 'eslint.config.mjs'] // Added the config file to ignores
   },
   {
+    files: ['**/*.ts', '**/*.tsx'], // Only apply TypeScript rules to TS files
     plugins: {
       prettier,
       '@typescript-eslint': typescriptEslint
@@ -29,7 +30,6 @@ const eslintConfig = [
       parser: tsParser,
       ecmaVersion: 5,
       sourceType: 'module',
-
       parserOptions: {
         project: './tsconfig.json',
         createDefaultProgram: true
@@ -63,21 +63,12 @@ const eslintConfig = [
       'import/no-extraneous-dependencies': 'off',
       'react/display-name': 'off',
       'import/no-unresolved': ['off', { caseSensitive: false }],
-
-      'import/no-unresolved': [
-        'off',
-        {
-          caseSensitive: false
-        }
-      ],
-
       'no-restricted-imports': [
         'error',
         {
           patterns: ['@mui/*/*/*', '!@mui/material/test-utils/*']
         }
       ],
-
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -85,7 +76,6 @@ const eslintConfig = [
           args: 'none'
         }
       ],
-
       'prettier/prettier': [
         'warn',
         {
@@ -97,6 +87,14 @@ const eslintConfig = [
           useTabs: false
         }
       ]
+    }
+  },
+  // Add a separate config for JS files
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module'
     }
   }
 ];

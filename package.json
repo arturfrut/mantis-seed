@@ -21,6 +21,8 @@
     "@mui/lab": "6.0.0-beta.24",
     "@mui/material": "6.4.1",
     "@mui/system": "6.4.1",
+    "@trpc/client": "^11.0.0-rc.828",
+    "@trpc/server": "^11.0.0-rc.828",
     "axios": "1.7.9",
     "formik": "2.4.6",
     "framer-motion": "12.0.6",

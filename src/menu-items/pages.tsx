@@ -51,6 +51,13 @@ const pages: NavItemType = {
           type: 'item',
           url: '/pages/under-construction',
           target: true
+        },
+        {
+          id: 'test-trpc',
+          title: 'test-trpc',
+          type: 'item',
+          url: '/pages/test-trpc',
+          target: true
         }
       ]
     },

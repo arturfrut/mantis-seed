@@ -679,6 +679,16 @@
   dependencies:
     tslib "^2.8.0"
 
+"@trpc/client@^11.0.0-rc.828":
+  version "11.0.0-rc.828"
+  resolved "https://registry.npmjs.org/@trpc/client/-/client-11.0.0-rc.828.tgz"
+  integrity sha512-pV2bELnPqH7S2R1wBH6OB7lOi61ELt8CEcvHuxVM2YhL4hP408tzKT0YvNBo4GVqc8So/1ncpXJyRJQG0o6rsQ==
+
+"@trpc/server@^11.0.0-rc.828", "@trpc/server@11.0.0-rc.828+322552736":
+  version "11.0.0-rc.828"
+  resolved "https://registry.npmjs.org/@trpc/server/-/server-11.0.0-rc.828.tgz"
+  integrity sha512-+dvcIcE5QPy52cz4rqwfUqk+WQDYAH3Xri+u2t0NdzIoo78fnL14if8oSZXAPU1bCmWGyR1k/0m5rSQ7AZaKlQ==
+
 "@types/estree@^1.0.6":
   version "1.0.6"
   resolved "https://registry.npmjs.org/@types/estree/-/estree-1.0.6.tgz"
@@ -3629,7 +3639,7 @@ typed-array-length@^1.0.7:
     possible-typed-array-names "^1.0.0"
     reflect.getprototypeof "^1.0.6"
 
-typescript@>=3.3.1, typescript@>=4.8.4, "typescript@>=4.8.4 <5.8.0", typescript@>=5.0.4, typescript@5, typescript@5.7.3:
+typescript@>=3.3.1, typescript@>=4.8.4, "typescript@>=4.8.4 <5.8.0", typescript@>=5.0.4, typescript@>=5.7.2, typescript@5, typescript@5.7.3:
   version "5.7.3"
   resolved "https://registry.npmjs.org/typescript/-/typescript-5.7.3.tgz"
   integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==

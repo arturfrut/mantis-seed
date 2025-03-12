@@ -51,4 +51,9 @@ const config: DefaultConfigProps = {
   themeDirection: ThemeDirection.LTR
 };
 
+// ==============================|| URL CONFIG ||============================== //
+
+export const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.example.com';
+export const authBaseUrl = 'https://auth-api-427516.uc.r.appspot.com';
+
 export default config;
