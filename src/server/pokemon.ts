@@ -23,13 +23,10 @@ export const pokemonRouter = router({
   getPokemonByName: publicProcedure
     .input((val) => {
       const realInput = extractRealInput(val);
-      console.log('Input original de getPokemonByName:', val);
-      console.log('Input extraído de getPokemonByName:', realInput);
 
       return yup.string().required('El nombre del Pokémon es obligatorio').validateSync(realInput);
     })
     .query(async ({ input }) => {
-      console.log('Buscando Pokémon con nombre:', input);
 
       try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${input}`);

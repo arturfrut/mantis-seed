@@ -12,6 +12,10 @@ export const appRouter = router({
   getPokemonByName: pokemonRouter.getPokemonByName,
   getPokemonTypes: pokemonRouter.getPokemonTypes,
 
+  register: authRouter.register,
+  login: authRouter.login,
+  me: authRouter.me,
+
   getTodo: todoRouter.getTodo,
   createTodo: todoRouter.createTodo
 });

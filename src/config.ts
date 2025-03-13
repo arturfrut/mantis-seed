@@ -53,7 +53,8 @@ const config: DefaultConfigProps = {
 
 // ==============================|| URL CONFIG ||============================== //
 
-export const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.example.com';
+// export const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.example.com';
 export const authBaseUrl = 'https://auth-api-427516.uc.r.appspot.com';
+export const apiUrl = 'https://api-bota.aokitech.com.ar';
 
 export default config;
